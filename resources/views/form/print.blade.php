@@ -311,7 +311,14 @@
                             <div class="details-value">{{ $form->electronic_signature }}</div>
                         </div>
                     </div>
-
+                    @if ($form->comments)
+                        <div class="" style="margin-top: 10px; margin-bottom: 10px">
+                            <div>
+                                <div class="details-label" data-en="Comment:" data-ar="تعليق:">Comment:</div>
+                                <div class="details-value">{{ $form->comments }}</div>
+                            </div>
+                        </div>
+                    @endif
 
                     <div class="details-grid" style="margin-bottom: 10px">
                         <div>
@@ -326,7 +333,7 @@
                     </div>
                     <table class="items-table">
                         <thead>
-                            <tr>
+                            <tr style="text-align: left;">
                                 <th data-en="TYPE" data-ar="النوع">TYPE</th>
                                 <th data-en="ELECTRONIC ACCOUNT" data-ar="الحساب الإلكتروني">ELECTRONIC ACCOUNT</th>
                                 <th data-en="AGREED TO TERMS" data-ar="الموافقة على الشروط">AGREED TO TERMS</th>
@@ -336,7 +343,8 @@
                             <tr>
                                 <td class="description">{{ $form->type }}</td>
                                 <td>{{ $form->electronic_account_name }}</td>
-                                <td>{{ ucfirst($form->agreed_to_terms) }}</td>
+                                <td data-en="{{ ucfirst($form->agreed_to_terms) }}"
+                                    data-ar="{{ ucfirst($form->agreed_to_terms) == 'I agreed through WhatsApp' ? 'تمت الموافقة عبر الواتس اب' : 'لقد وافقت' }}"> {{ ucfirst($form->agreed_to_terms) }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -345,18 +353,7 @@
                         <span data-en="TOTAL :" data-ar="المجموع :">TOTAL :</span>
                         {{ number_format($form->amount_previously_paid, 2) }}
                     </div>
-                    <p class="addressLine" data-en="United Arab Emirates - Sharjah PO Box no 35000"
-                        data-ar="الإمارات العربية المتحدة - الشارقة - ص ب ٣٥٠٠٠">
-                        United Arab Emirates - Sharjah PO Box no 35000
-                    </p>
-                    @if ($form->comments)
-                        <div class="" style="margin-top: 10px; margin-bottom: 10px">
-                            <div>
-                                <div class="details-label" data-en="Comment:" data-ar="تعليق:">Comment:</div>
-                                <div class="details-value">{{ $form->comments }}</div>
-                            </div>
-                        </div>
-                    @endif
+
                 </div>
                 <div class="signature-section">
                     <div></div>
@@ -369,8 +366,14 @@
                     </div>
                 </div>
 
+
+
                 <div>
                     <div class="footer-notes">
+                        <p class="addressLine" data-en="United Arab Emirates - Sharjah PO Box no 35000 Villa no 5"
+                            data-ar="الإمارات العربية المتحدة - الشارقة ص ب ٣٥٠٠٠ فيلا رقم ٥">
+                            United Arab Emirates - Sharjah PO Box no 35000 Villa no 5
+                        </p>
                         <p data-en="Thank you for your business. This invoice reflects the transaction details mentioned above."
                             data-ar="شكرًا لتعاملكم معنا. تعكس هذه الفاتورة تفاصيل المعاملة المذكورة أعلاه.">
                             Thank you for your business. This invoice reflects the transaction details mentioned above.

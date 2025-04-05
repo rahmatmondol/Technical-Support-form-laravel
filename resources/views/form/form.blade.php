@@ -33,7 +33,7 @@
                     <h1 class="text-2xl md:text-3xl font-bold mb-2">Technical Support Secure Websites & Electronic
                         Accounts</h1>
                     <div class="flex flex-wrap justify-center gap-4 text-sm md:text-base text-white/90">
-                        <p><i class="fas fa-phone mr-1"></i> +971563003001</p>
+                        <p><i class="fas fa-phone mr-1"></i> +971562002001</p>
                         <p><i class="fas fa-envelope mr-1"></i> admin@uaesos.com</p>
                         <p><i class="fas fa-globe mr-1"></i> https://www.uaesos.com</p>
                     </div>
@@ -384,27 +384,27 @@
             });
         });
 
-        fetch('https://restcountries.com/v3.1/all')
-            .then(response => response.json())
-            .then(countries => {
-                if (countries) {
-                    const countrySelect = document.getElementById('country');
-                    const selectElement = document.createElement('select');
-                    selectElement.id = 'country';
-                    selectElement.name = 'address_country';
-                    selectElement.classList.add('w-full', 'pl-10', 'pr-3', 'py-2', 'bg-card-light', 'dark:bg-card-dark',
-                        'border', 'rounded-lg', 'appearance-none');
-                    selectElement.innerHTML = '<option value="" selected disabled>Select a country</option>';
-                    for (const country of countries) {
-                        const option = document.createElement('option');
-                        option.value = country.cca2;
-                        option.textContent = country.name.common;
-                        selectElement.appendChild(option);
-                    }
-                    countrySelect.parentElement.replaceChild(selectElement, countrySelect);
-                }
+        // fetch('https://restcountries.com/v3.1/all')
+        //     .then(response => response.json())
+        //     .then(countries => {
+        //         if (countries) {
+        //             const countrySelect = document.getElementById('country');
+        //             const selectElement = document.createElement('select');
+        //             selectElement.id = 'country';
+        //             selectElement.name = 'address_country';
+        //             selectElement.classList.add('w-full', 'pl-10', 'pr-3', 'py-2', 'bg-card-light', 'dark:bg-card-dark',
+        //                 'border', 'rounded-lg', 'appearance-none');
+        //             selectElement.innerHTML = '<option value="" selected disabled>Select a country</option>';
+        //             for (const country of countries) {
+        //                 const option = document.createElement('option');
+        //                 option.value = country.cca2;
+        //                 option.textContent = country.name.common;
+        //                 selectElement.appendChild(option);
+        //             }
+        //             countrySelect.parentElement.replaceChild(selectElement, countrySelect);
+        //         }
 
-            });
+        //     });
     </script>
 </body>
 

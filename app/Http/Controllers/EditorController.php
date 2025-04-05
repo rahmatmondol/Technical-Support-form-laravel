@@ -10,6 +10,11 @@ class EditorController extends Controller
     public function index()
     {
         $editors = User::role('editor')->with('forms')->get();
+        // calclulate total amount 
+        $editors->each(function ($editor) {
+            $editor->total_amount = $editor->forms->sum('amount_previously_paid');
+        });
+
         // return $editors;
         return view('editor.index', compact('editors'));
     }
