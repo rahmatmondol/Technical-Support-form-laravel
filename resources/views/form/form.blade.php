@@ -27,9 +27,11 @@
             <div class="bg-gradient-to-r from-primary to-primary-dark text-white p-6 md:p-8 text-center">
                 <div class="flex flex-col items-center">
                     <div class="w-40 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4">
-                        <img src="{{ asset('assets/logo.png') }}" alt="Logo" class="w-40 h-16 object-contain rounded">
+                        <img src="{{ asset('assets/logo.png') }}" alt="Logo"
+                            class="w-40 h-16 object-contain rounded">
                     </div>
-                    <h1 class="text-2xl md:text-3xl font-bold mb-2">Technical Support Secure Websites & Electronic Accounts</h1>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-2">Technical Support Secure Websites & Electronic
+                        Accounts</h1>
                     <div class="flex flex-wrap justify-center gap-4 text-sm md:text-base text-white/90">
                         <p><i class="fas fa-phone mr-1"></i> +971563003001</p>
                         <p><i class="fas fa-envelope mr-1"></i> admin@uaesos.com</p>
@@ -51,19 +53,18 @@
             <!-- Invoice Form -->
             <div class="p-6 md:p-8">
                 @if (session('success'))
-                        <div
-                            class="mb-4 rounded-lg bg-green-100 dark:bg-green-800 p-4 text-green-700 dark:text-green-200">
-                            {{ session('success') }}
-                        </div>
-                    @endif
+                    <div class="mb-4 rounded-lg bg-green-100 dark:bg-green-800 p-4 text-green-700 dark:text-green-200">
+                        {{ session('success') }}
+                    </div>
+                @endif
 
-                    @if (session('error'))
-                        <div class="mb-4 rounded-lg bg-red-100 dark:bg-red-800 p-4 text-red-700 dark:text-red-200">
-                            <ul class="list-disc pl-5">
-                                {{ session(key: 'error') }}
-                            </ul>
-                        </div>
-                    @endif
+                @if (session('error'))
+                    <div class="mb-4 rounded-lg bg-red-100 dark:bg-red-800 p-4 text-red-700 dark:text-red-200">
+                        <ul class="list-disc pl-5">
+                            {{ session(key: 'error') }}
+                        </ul>
+                    </div>
+                @endif
                 <form method="POST" action="{{ route('form.store') }}">
                     @csrf
                     {{-- <div class="block md:flex items-center justify-between mb-6 pb-4 border-b border-border-light dark:border-border-dark">
@@ -77,11 +78,13 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-6">
                             <div class="relative">
-                                <label for="submissionDate" class="block text-sm font-medium mb-1 text-text-light dark:text-text-dark">
+                                <label for="submissionDate"
+                                    class="block text-sm font-medium mb-1 text-text-light dark:text-text-dark">
                                     <i class="far fa-calendar-alt mr-2"></i>Service Submission Date
                                 </label>
                                 <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
+                                    <div
+                                        class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
                                         <i class="fas fa-calendar-check"></i>
                                     </div>
                                     <input type="date" id="submissionDate" name="service_submission_date"
@@ -89,15 +92,17 @@
                                         value="{{ old('service_submission_date') }}" />
                                 </div>
                                 @error('service_submission_date')
-                                <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="relative">
-                                <label for="customerName" class="block text-sm font-medium mb-1 text-text-light dark:text-text-dark">
+                                <label for="customerName"
+                                    class="block text-sm font-medium mb-1 text-text-light dark:text-text-dark">
                                     Customer Name
                                 </label>
                                 <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
+                                    <div
+                                        class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
                                         <i class="fas fa-user"></i>
                                     </div>
                                     <input type="text" id="customerName" name="customer_name"
@@ -105,15 +110,17 @@
                                         placeholder="John Doe" value="{{ old('customer_name') }}" />
                                 </div>
                                 @error('customer_name')
-                                <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="relative">
-                                <label for="customerPhone" class="block text-sm font-medium mb-1 text-text-light dark:text-text-dark">
+                                <label for="customerPhone"
+                                    class="block text-sm font-medium mb-1 text-text-light dark:text-text-dark">
                                     Phone Number for which the service was provided:
                                 </label>
                                 <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
+                                    <div
+                                        class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
                                         <i class="fas fa-mobile-alt"></i>
                                     </div>
                                     <input type="tel" id="customerPhone" name="phone_number"
@@ -121,15 +128,17 @@
                                         placeholder="+880XXXXXXXXX" value="{{ old('phone_number') }}" />
                                 </div>
                                 @error('phone_number')
-                                <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="relative">
-                                <label for="city" class="block text-sm font-medium mb-1 text-text-light dark:text-text-dark">
+                                <label for="city"
+                                    class="block text-sm font-medium mb-1 text-text-light dark:text-text-dark">
                                     City
                                 </label>
                                 <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
+                                    <div
+                                        class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
                                         <i class="fas fa-city"></i>
                                     </div>
                                     <input type="text" id="city" name="address_city"
@@ -137,31 +146,41 @@
                                         placeholder="Dhaka" value="{{ old('address_city') }}" />
                                 </div>
                                 @error('address_city')
-                                <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <div class="relative">
-                                <label for="country" class="block text-sm font-medium mb-1 text-text-light dark:text-text-dark">
+                            <div class="relative mb-4">
+                                <label for="country"
+                                    class="block text-sm font-medium mb-1 text-text-light dark:text-text-dark">
                                     Country
                                 </label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
+                                <div class="relative ">
+                                    <div
+                                        class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
                                         <i class="fas fa-globe"></i>
                                     </div>
-                                    <input type="text" id="country" name="address_country"
+                                    {{-- <input type="text" id="country" name="address_country"
                                         class="w-full pl-10 pr-3 py-2 bg-card-light dark:bg-card-dark border @error('address_country') border-red-500 @else border-border-light dark:border-border-dark @enderror rounded-lg "
-                                        placeholder="Bangladesh" value="{{ old('address_country') }}" />
+                                        placeholder="Bangladesh" value="{{ old('address_country') }}" /> --}}
+
+                                    <select id="country" name="address_country"
+                                        class="w-full pl-10 pr-3 py-2 bg-card-light dark:bg-card-dark border @error('address_country') border-red-500 @else border-border-light dark:border-border-dark @enderror rounded-lg appearance-none">
+                                        <option value="" selected disabled>Select a country</option>
+                                    </select>
+
                                 </div>
                                 @error('address_country')
-                                <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="relative">
-                                <label for="comments" class="block text-sm font-medium mb-1 text-text-light dark:text-text-dark">
+                                <label for="comments"
+                                    class="block text-sm font-medium mb-1 text-text-light dark:text-text-dark">
                                     Comments (if any)
                                 </label>
                                 <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
+                                    <div
+                                        class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
                                         <i class="fas fa-comment"></i>
                                     </div>
                                     <textarea id="comments" name="comments" rows="3"
@@ -169,118 +188,139 @@
                                         placeholder="Any additional comments">{{ old('comments') }}</textarea>
                                 </div>
                                 @error('comments')
-                                <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
 
                         </div>
                         <div class="space-y-6">
                             <div class="relative">
-                                <label for="accountName" class="block text-sm font-medium mb-1 text-text-light dark:text-text-dark">
+                                <label for="accountName"
+                                    class="block text-sm font-medium mb-1 text-text-light dark:text-text-dark">
                                     Electronic Account Name
                                 </label>
                                 <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
+                                    <div
+                                        class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
                                         <i class="fas fa-at"></i>
                                     </div>
                                     <input type="text" id="accountName" name="electronic_account_name"
                                         class="w-full pl-10 pr-3 py-2 bg-card-light dark:bg-card-dark border @error('electronic_account_name') border-red-500 @else border-border-light dark:border-border-dark @enderror rounded-lg "
-                                        placeholder="username@example.com" value="{{ old('electronic_account_name') }}" />
+                                        placeholder="username@example.com"
+                                        value="{{ old('electronic_account_name') }}" />
                                 </div>
                                 @error('electronic_account_name')
-                                <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="relative">
-                                <label for="serviceType" class="block text-sm font-medium mb-1 text-text-light dark:text-text-dark">
+                                <label for="serviceType"
+                                    class="block text-sm font-medium mb-1 text-text-light dark:text-text-dark">
                                     Type of Service Provided
                                 </label>
                                 <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
+                                    <div
+                                        class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
                                         <i class="fas fa-tools"></i>
                                     </div>
                                     <select id="serviceType" name="type"
                                         class="w-full pl-10 pr-3 py-2 bg-card-light dark:bg-card-dark border @error('type') border-red-500 @else border-border-light dark:border-border-dark @enderror rounded-lg  appearance-none">
                                         <option value="" selected disabled>Select a service</option>
                                         @foreach ($services as $service)
-                                        <option value="{{ $service }}" {{ old('type') == $service ? 'selected' : '' }}>
-                                            {{ $service }}</option>
+                                            <option value="{{ $service }}"
+                                                {{ old('type') == $service ? 'selected' : '' }}>
+                                                {{ $service }}</option>
                                         @endforeach
                                     </select>
-                                    <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-500">
+                                    <div
+                                        class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-500">
                                         <i class="fas fa-chevron-down"></i>
                                     </div>
                                 </div>
                                 @error('type')
-                                <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="relative">
-                                <label for="amountPaid" class="block text-sm font-medium mb-1 text-text-light dark:text-text-dark">
+                                <label for="amountPaid"
+                                    class="block text-sm font-medium mb-1 text-text-light dark:text-text-dark">
                                     Amount previously paid
                                 </label>
                                 <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
+                                    <div
+                                        class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
                                         <i class="fa-solid fa-money-bills"></i>
                                     </div>
                                     <input type="number" id="amountPaid" name="amount_previously_paid"
                                         class="w-full pl-10 pr-3 py-2 bg-card-light dark:bg-card-dark border @error('amount_previously_paid') border-red-500 @else border-border-light dark:border-border-dark @enderror rounded-lg "
-                                        step="0.01" placeholder="0.00" value="{{ old('amount_previously_paid') }}" />
+                                        step="0.01" placeholder="0.00"
+                                        value="{{ old('amount_previously_paid') }}" />
                                 </div>
                                 @error('amount_previously_paid')
-                                <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="relative">
-                                <label for="electronicSignature" class="block text-sm font-medium mb-1 text-text-light dark:text-text-dark">
+                                <label for="electronicSignature"
+                                    class="block text-sm font-medium mb-1 text-text-light dark:text-text-dark">
                                     Electronic Signature
                                 </label>
                                 <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
+                                    <div
+                                        class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
                                         <i class="fas fa-signature"></i>
                                     </div>
                                     <input type="text" id="electronicSignature" name="electronic_signature"
                                         class="w-full pl-10 pr-3 py-2 bg-card-light dark:bg-card-dark border @error('electronic_signature') border-red-500 @else border-border-light dark:border-border-dark @enderror rounded-lg "
-                                        placeholder="Type your full name as signature" value="{{ old('electronic_signature') }}" />
+                                        placeholder="Type your full name as signature"
+                                        value="{{ old('electronic_signature') }}" />
                                 </div>
                                 @error('electronic_signature')
-                                <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="relative">
                                 <label class="block text-sm font-medium mb-2 text-text-light dark:text-text-dark">
-                                    <i class="fas fa-file-contract mr-2"></i>Have you previously agreed to the company's terms and conditions?
+                                    <i class="fas fa-file-contract mr-2"></i>Have you previously agreed to the
+                                    company's terms and conditions?
                                 </label>
-                                <div class="bg-secondary-light dark:bg-secondary-dark p-4 rounded-lg border border-border-light dark:border-border-dark">
+                                <div
+                                    class="bg-secondary-light dark:bg-secondary-dark p-4 rounded-lg border border-border-light dark:border-border-dark">
                                     <div class="gap-6">
                                         <div class="flex items-center mb-3">
-                                            <input type="radio" name="agreed_to_terms" id="termsYes" value="yes"
+                                            <input type="radio" name="agreed_to_terms" id="termsYes"
+                                                value="yes"
                                                 class="h-4 w-4 text-primary focus:ring-primary border @error('agreed_to_terms') border-red-500 @else border-border-light dark:border-border-dark @enderror"
                                                 {{ old('agreed_to_terms') == 'yes' ? 'checked' : '' }} />
-                                            <label for="termsYes" class="ml-2 text-sm text-text-light dark:text-text-dark">
+                                            <label for="termsYes"
+                                                class="ml-2 text-sm text-text-light dark:text-text-dark">
                                                 I Agree
                                             </label>
                                         </div>
                                         <div class="flex items-center mb-3">
-                                            <input type="radio" name="agreed_to_terms" id="termsWhatsapp" value="I agreed through WhatsApp"
+                                            <input type="radio" name="agreed_to_terms" id="termsWhatsapp"
+                                                value="I agreed through WhatsApp"
                                                 class="h-4 w-4 text-primary focus:ring-primary border @error('agreed_to_terms') border-red-500 @else border-border-light dark:border-border-dark @enderror"
                                                 {{ old('agreed_to_terms') == 'I agreed through WhatsApp' ? 'checked' : '' }} />
-                                            <label for="termsWhatsapp" class="ml-2 text-sm text-text-light dark:text-text-dark">
+                                            <label for="termsWhatsapp"
+                                                class="ml-2 text-sm text-text-light dark:text-text-dark">
                                                 I agreed through WhatsApp
                                             </label>
                                         </div>
                                         <div class="flex items-center mb-3">
-                                            <input type="radio" name="agreed_to_terms" id="termsNo" value="no"
+                                            <input type="radio" name="agreed_to_terms" id="termsNo"
+                                                value="no"
                                                 class="h-4 w-4 text-primary focus:ring-primary border @error('agreed_to_terms') border-red-500 @else border-border-light dark:border-border-dark @enderror"
                                                 {{ old('agreed_to_terms') == 'no' ? 'checked' : '' }} />
-                                            <label for="termsNo" class="ml-2 text-sm text-text-light dark:text-text-dark">
+                                            <label for="termsNo"
+                                                class="ml-2 text-sm text-text-light dark:text-text-dark">
                                                 I Disagree
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 @error('agreed_to_terms')
-                                <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
                         </div>
@@ -344,6 +384,19 @@
                 });
             });
         });
+
+        fetch('https://restcountries.com/v3.1/all')
+            .then(response => response.json())
+            .then(countries => {
+                const countrySelect = document.getElementById('country');
+                for (const country of countries) {
+                    const option = document.createElement('option');
+                    option.value = country.cca2;
+                    option.textContent = country.name.common;
+                    countrySelect.appendChild(option);
+                }
+            });
+
     </script>
 </body>
 
