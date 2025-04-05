@@ -15,9 +15,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-
-
-
+use App\Http\Controllers\EditorController;
 
 Route::middleware('guest')->group(function () {
 
@@ -50,12 +48,13 @@ Route::middleware('auth')->group(function () {
     //     return view('dashboard');
     // })->name('dashboard');
 
+    Route::get('editor', [EditorController::class, 'index'])->name('editor');
 
 
-    Route::get('register', [RegisteredUserController::class, 'create'])
+    Route::get('register', [EditorController::class, 'create'])
         ->name('register');
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    Route::post('register', [EditorController::class, 'store'])->name('editor.store');
 
 
     Route::get('verify-email', EmailVerificationPromptController::class)
@@ -79,34 +78,30 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 
-
-
-
-
     //custom middleware
 
 
-    Route::get('form/show/{form}',[FormController::class,'show'])->name('form.show');
-    Route::delete('form/show/{form}',[FormController::class,'destroy'])->name('form.destroy');
-    Route::get('form/edit/{form}',[FormController::class,'edit'])->name('form.edit');
-    Route::put('form/edit/{form}',[FormController::class,'update'])->name('form.update');
+    Route::get('form/show/{form}', [FormController::class, 'show'])->name('form.show');
+    Route::delete('form/show/{form}', [FormController::class, 'destroy'])->name('form.destroy');
+    Route::get('form/edit/{form}', [FormController::class, 'edit'])->name('form.edit');
+    Route::put('form/edit/{form}', [FormController::class, 'update'])->name('form.update');
 
 
-    Route::get('/dashboard',[FormController::class,'index'])->name('dashboard');
-    Route::post('/form/print',[FormController::class,'printSelected'])->name('form.printSelected');
+    Route::get('/dashboard', [FormController::class, 'index'])->name('dashboard');
+    Route::post('/form/print', [FormController::class, 'printSelected'])->name('form.printSelected');
 
 
-    Route::get('/services',[ServiceController::class,'index'])->name('services.index');
-    Route::get('/services/edit/{service}',[ServiceController::class,'edit'])->name('services.edit');
-    Route::put('/services/edit/{service}',[ServiceController::class,'update'])->name('services.update');
-    Route::delete('/services/delete/{id}',[ServiceController::class,'destroy'])->name('services.destroy');
+    Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+    Route::get('/services/edit/{service}', [ServiceController::class, 'edit'])->name('services.edit');
+    Route::put('/services/edit/{service}', [ServiceController::class, 'update'])->name('services.update');
+    Route::delete('/services/delete/{id}', [ServiceController::class, 'destroy'])->name('services.destroy');
 
 
-    Route::get('/services/create',[ServiceController::class,'create'])->name('services.create');
-    Route::post('/services/create',[ServiceController::class,'store'])->name('services.store');
+    Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
+    Route::post('/services/create', [ServiceController::class, 'store'])->name('services.store');
 
-Route::get('/profile/signature',[ProfileController::class,'signatureUpdateForm'])->name('profile.signatureUpdateForm');
-    Route::put('/profile/signature',[ProfileController::class,'signatureUpdate'])->name('profile.signatureUpdate');
+    Route::get('/profile/signature', [ProfileController::class, 'signatureUpdateForm'])->name('profile.signatureUpdateForm');
+    Route::put('/profile/signature', [ProfileController::class, 'signatureUpdate'])->name('profile.signatureUpdate');
 });
-Route::get('/',[FormController::class,'create'])->name('form.create');
-Route::post('/form/store',[FormController::class,'store'])->name('form.store');
+Route::get('/', [FormController::class, 'create'])->name('form.create');
+Route::post('/form/store', [FormController::class, 'store'])->name('form.store');

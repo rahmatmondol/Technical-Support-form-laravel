@@ -125,7 +125,7 @@
                                     </div>
                                     <input type="tel" id="customerPhone" name="phone_number"
                                         class="w-full pl-10 pr-3 py-2 bg-card-light dark:bg-card-dark border @error('phone_number') border-red-500 @else border-border-light dark:border-border-dark @enderror rounded-lg "
-                                        placeholder="+880XXXXXXXXX" value="{{ old('phone_number') }}" />
+                                        placeholder="enter your phone number" value="{{ old('phone_number') }}" />
                                 </div>
                                 @error('phone_number')
                                     <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -143,7 +143,7 @@
                                     </div>
                                     <input type="text" id="city" name="address_city"
                                         class="w-full pl-10 pr-3 py-2 bg-card-light dark:bg-card-dark border @error('address_city') border-red-500 @else border-border-light dark:border-border-dark @enderror rounded-lg "
-                                        placeholder="Dhaka" value="{{ old('address_city') }}" />
+                                        placeholder="enter your city" value="{{ old('address_city') }}" />
                                 </div>
                                 @error('address_city')
                                     <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -159,38 +159,37 @@
                                         class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
                                         <i class="fas fa-globe"></i>
                                     </div>
-                                    {{-- <input type="text" id="country" name="address_country"
+                                    <input type="text" id="country" name="address_country"
                                         class="w-full pl-10 pr-3 py-2 bg-card-light dark:bg-card-dark border @error('address_country') border-red-500 @else border-border-light dark:border-border-dark @enderror rounded-lg "
-                                        placeholder="Bangladesh" value="{{ old('address_country') }}" /> --}}
+                                        placeholder="enter your country" value="{{ old('address_country') }}" />
 
-                                    <select id="country" name="address_country"
-                                        class="w-full pl-10 pr-3 py-2 bg-card-light dark:bg-card-dark border @error('address_country') border-red-500 @else border-border-light dark:border-border-dark @enderror rounded-lg appearance-none">
-                                        <option value="" selected disabled>Select a country</option>
-                                    </select>
 
                                 </div>
                                 @error('address_country')
                                     <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <div class="relative">
-                                <label for="comments"
-                                    class="block text-sm font-medium mb-1 text-text-light dark:text-text-dark">
-                                    Comments (if any)
-                                </label>
+
+                            @if (auth()->check())
                                 <div class="relative">
-                                    <div
-                                        class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
-                                        <i class="fas fa-comment"></i>
+                                    <label for="comments"
+                                        class="block text-sm font-medium mb-1 text-text-light dark:text-text-dark">
+                                        Comments (if any)
+                                    </label>
+                                    <div class="relative">
+                                        <div
+                                            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
+                                            <i class="fas fa-comment"></i>
+                                        </div>
+                                        <textarea id="comments" name="comments" rows="3" maxlength="100"
+                                            class="w-full pl-10 pr-3 py-2 bg-card-light dark:bg-card-dark border @error('comments') border-red-500 @else border-border-light dark:border-border-dark @enderror rounded-lg "
+                                            placeholder="Any additional comments">{{ old('comments') }}</textarea>
                                     </div>
-                                    <textarea id="comments" name="comments" rows="3"
-                                        class="w-full pl-10 pr-3 py-2 bg-card-light dark:bg-card-dark border @error('comments') border-red-500 @else border-border-light dark:border-border-dark @enderror rounded-lg "
-                                        placeholder="Any additional comments">{{ old('comments') }}</textarea>
+                                    @error('comments')
+                                        <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    @enderror
                                 </div>
-                                @error('comments')
-                                    <p class="absolute text-red-500 text-sm mt-1">{{ $message }}</p>
-                                @enderror
-                            </div>
+                            @endif
 
                         </div>
                         <div class="space-y-6">
@@ -388,15 +387,24 @@
         fetch('https://restcountries.com/v3.1/all')
             .then(response => response.json())
             .then(countries => {
-                const countrySelect = document.getElementById('country');
-                for (const country of countries) {
-                    const option = document.createElement('option');
-                    option.value = country.cca2;
-                    option.textContent = country.name.common;
-                    countrySelect.appendChild(option);
+                if (countries) {
+                    const countrySelect = document.getElementById('country');
+                    const selectElement = document.createElement('select');
+                    selectElement.id = 'country';
+                    selectElement.name = 'address_country';
+                    selectElement.classList.add('w-full', 'pl-10', 'pr-3', 'py-2', 'bg-card-light', 'dark:bg-card-dark',
+                        'border', 'rounded-lg', 'appearance-none');
+                    selectElement.innerHTML = '<option value="" selected disabled>Select a country</option>';
+                    for (const country of countries) {
+                        const option = document.createElement('option');
+                        option.value = country.cca2;
+                        option.textContent = country.name.common;
+                        selectElement.appendChild(option);
+                    }
+                    countrySelect.parentElement.replaceChild(selectElement, countrySelect);
                 }
-            });
 
+            });
     </script>
 </body>
 

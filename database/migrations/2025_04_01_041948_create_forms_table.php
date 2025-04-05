@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('forms', function (Blueprint $table) {
             $table->id();
-            $table->string('invoice_id',10)->unique();
+            $table->string('invoice_id', 10)->unique();
             $table->timestamp('service_submission_date');
             $table->string('customer_name');
             $table->string('address_line_1')->nullable();
@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('phone_number');
             $table->decimal('amount_previously_paid', 10, 2);
             $table->string('electronic_signature');
+            $table->text('comments')->nullable();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -311,12 +311,7 @@
                             <div class="details-value">{{ $form->electronic_signature }}</div>
                         </div>
                     </div>
-                    <div class="" style="margin-bottom: 10px">
-                        <div>
-                            <div class="details-label" data-en="Comment:" data-ar="تعليق:">Comment:</div>
-                            <div class="details-value">{{ $form->comments }}</div>
-                        </div>
-                    </div>
+
 
                     <div class="details-grid" style="margin-bottom: 10px">
                         <div>
@@ -354,6 +349,14 @@
                         data-ar="الإمارات العربية المتحدة - الشارقة - ص ب ٣٥٠٠٠">
                         United Arab Emirates - Sharjah PO Box no 35000
                     </p>
+                    @if ($form->comments)
+                        <div class="" style="margin-top: 10px; margin-bottom: 10px">
+                            <div>
+                                <div class="details-label" data-en="Comment:" data-ar="تعليق:">Comment:</div>
+                                <div class="details-value">{{ $form->comments }}</div>
+                            </div>
+                        </div>
+                    @endif
                 </div>
                 <div class="signature-section">
                     <div></div>
@@ -389,7 +392,8 @@
             style="background-color: #4CAF50; color: white; border: none; border-radius: 4px; padding: 10px 15px; cursor: pointer; font-size: 14px; transition: background-color 0.3s;">Print
             Invoices</button>
         <button onclick="toggleLayout()"
-            style="background-color: #2196F3; color: white; border: none; border-radius: 4px; padding: 10px 15px; cursor: pointer; font-size: 14px; transition: background-color 0.3s;">Change Language</button>
+            style="background-color: #2196F3; color: white; border: none; border-radius: 4px; padding: 10px 15px; cursor: pointer; font-size: 14px; transition: background-color 0.3s;">Change
+            Language</button>
     </div>
     <script>
         function toggleLayout() {

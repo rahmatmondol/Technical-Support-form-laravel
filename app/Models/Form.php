@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+
 class Form extends Model
 {
     protected $fillable = [
@@ -20,4 +21,9 @@ class Form extends Model
         'electronic_signature',
         'comments',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

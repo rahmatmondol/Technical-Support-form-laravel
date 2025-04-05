@@ -14,9 +14,21 @@ class FormController extends Controller
      */
     public function index()
     {
-        return view('form.forms', [
-            'forms' => Form::orderBy('id', 'desc')->paginate(20),
-        ]);
+        //get all forms
+        if (auth()->user()->hasRole('editor')) {
+            $forms = Form::where('user_id', auth()->user()->id)->orderBy('id', 'desc')->paginate(20);
+        } elseif (auth()->user()->hasRole('admin')) {
+            $editor_id = request()->query('editor');
+            if ($editor_id) {
+                $forms = Form::where('user_id', $editor_id)->orderBy('id', 'desc')->paginate(20);
+            } else {
+                $forms = Form::orderBy('id', 'desc')->paginate(20);
+            }
+        }
+
+        // return $forms;
+
+        return view('form.forms', compact('forms'));
     }
 
     /**
@@ -61,19 +73,23 @@ class FormController extends Controller
             'phone_number' => 'required|string|max:25',
             'amount_previously_paid' => 'required|numeric',
             'electronic_signature' => 'required|string',
-            'comments' => 'nullable|string|max:300',
+            'comments' => 'nullable|string|max:100',
         ]);
 
-
-        try{
+        try {
             //create a new form
-            Form::create($validated);
+            $form = Form::create($validated);
+
+            if (auth()->check()) {
+                $form->user_id = auth()->user()->id;
+                $form->save();
+                return redirect()->route(route: 'dashboard')->with('success', 'Form submitted successfully');
+            }
+
             return redirect()->route(route: 'form.create')->with('success', 'Form submitted successfully');
-        }catch(\Exception $e){
-            return redirect()->route('form.create')->with('error', 'Form submission failed: '.$e->getMessage());
+        } catch (\Exception $e) {
+            return redirect()->route('form.create')->with('error', 'Form submission failed: ' . $e->getMessage());
         }
-
-
     }
 
     /**
@@ -85,7 +101,7 @@ class FormController extends Controller
         // dd($form->toArray());
 
         // //
-        return view('form.print',['forms'=>[$form]]);
+        return view('form.print', ['forms' => [$form]]);
     }
 
     /**
@@ -95,7 +111,7 @@ class FormController extends Controller
     {
         //
         $services = Service::get()->pluck('name')->toArray();
-        return view('form.edit',compact('form','services'));
+        return view('form.edit', compact('form', 'services'));
     }
 
     // /**
@@ -137,7 +153,6 @@ class FormController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to delete form: ' . $e->getMessage());
         }
-
     }
 
     public function printSelected(Request $request)
@@ -150,6 +165,5 @@ class FormController extends Controller
         return view('form.print', [
             'forms' => $form,
         ]);
-
     }
 }
