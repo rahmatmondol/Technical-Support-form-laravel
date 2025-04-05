@@ -166,4 +166,11 @@ class FormController extends Controller
             'forms' => $form,
         ]);
     }
+
+    public function list()
+    {
+        // Fetch all services with the given IDs
+        $form = Form::orderBy('id', 'desc')->paginate(100);
+        return response()->json($form);
+    }
 }

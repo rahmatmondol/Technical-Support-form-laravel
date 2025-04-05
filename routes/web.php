@@ -105,3 +105,4 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('/', [FormController::class, 'create'])->name('form.create');
 Route::post('/form/store', [FormController::class, 'store'])->name('form.store');
+route::get('api/submissions', [FormController::class, 'list'])->name('form.list');
