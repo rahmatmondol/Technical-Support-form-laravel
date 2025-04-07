@@ -60,25 +60,39 @@ class FormController extends Controller
 
         // dd($request->toArray());
 
-        $validated = $request->validate([
-            'invoice_id' => 'required|numeric|unique:forms,invoice_id',
-            'service_submission_date' => 'required|date',
-            'customer_name' => 'required|string|max:255',
-            'address_line_1' => 'nullable|string|min:3|max:255',
-            'address_city' => 'required|string|max:255',
-            'address_country' => 'required|string|max:255',
-            'electronic_account_name' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
-            'agreed_to_terms' => 'required|string|in:yes,"I agreed through WhatsApp"',
-            'phone_number' => 'required|string|max:25',
-            'amount_previously_paid' => 'required|numeric',
-            'electronic_signature' => 'required|string',
-            'comments' => 'nullable|string|max:100',
-        ]);
+        // $validated = $request->validate([
+        //     'invoice_id' => 'numeric|unique:forms,invoice_id',
+        //     'service_submission_date' => 'date',
+        //     'customer_name' => 'string|max:255|nullable',
+        //     'address_line_1' => 'nullable|string|min:3|max:255|nullable',
+        //     'address_city' => 'string|max:255|nullable',
+        //     'address_country' => 'string|max:255|nullable',
+        //     'electronic_account_name' => 'string|max:255|nullable',
+        //     'type' => 'string|max:255|nullable',
+        //     'agreed_to_terms' => 'string|in:yes,"I agreed through WhatsApp"',
+        //     'phone_number' => 'string|max:25|nullable',
+        //     'amount_previously_paid' => 'numeric|nullable',
+        //     'electronic_signature' => 'string|nullable',
+        //     'comments' => 'nullable|string|max:100',
+        // ]);
 
         try {
             //create a new form
-            $form = Form::create($validated);
+            $form = new Form;
+            $form->invoice_id = $request->invoice_id ??  mt_rand(1000000000, 9999999999);
+            $form->service_submission_date = $request->service_submission_date ?? now();
+            $form->customer_name = $request->customer_name ?? 'N/A';
+            $form->address_line_1 = $request->address_line_1 ?? 'N/A';
+            $form->address_city = $request->address_city ?? 'N/A';
+            $form->address_country = $request->address_country ?? 'N/A';
+            $form->electronic_account_name = $request->electronic_account_name ?? 'N/A';
+            $form->type = $request->type ?? 'N/A';
+            $form->agreed_to_terms = $request->agreed_to_terms ?? 'N/A';
+            $form->phone_number = $request->phone_number ?? 'N/A';
+            $form->amount_previously_paid = $request->amount_previously_paid ?? 0;
+            $form->electronic_signature = $request->electronic_signature ?? 'N/A';
+            $form->comments = $request->comments ?? 'N/A';
+            $form->save();
 
             if (auth()->check()) {
                 $form->user_id = auth()->user()->id;

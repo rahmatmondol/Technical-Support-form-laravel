@@ -87,7 +87,7 @@
                                         class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
                                         <i class="fas fa-calendar-check"></i>
                                     </div>
-                                    <input type="date" id="submissionDate" name="service_submission_date"
+                                    <input type="text" id="submissionDate" name="service_submission_date"
                                         class="w-full pl-10 pr-3 py-2 bg-card-light dark:bg-card-dark border @error('service_submission_date') border-red-500 @else border-border-light dark:border-border-dark @enderror rounded-lg focus:outline-none "
                                         value="{{ old('service_submission_date') }}" />
                                 </div>
@@ -384,28 +384,19 @@
             });
         });
 
-        // fetch('https://restcountries.com/v3.1/all')
-        //     .then(response => response.json())
-        //     .then(countries => {
-        //         if (countries) {
-        //             const countrySelect = document.getElementById('country');
-        //             const selectElement = document.createElement('select');
-        //             selectElement.id = 'country';
-        //             selectElement.name = 'address_country';
-        //             selectElement.classList.add('w-full', 'pl-10', 'pr-3', 'py-2', 'bg-card-light', 'dark:bg-card-dark',
-        //                 'border', 'rounded-lg', 'appearance-none');
-        //             selectElement.innerHTML = '<option value="" selected disabled>Select a country</option>';
-        //             for (const country of countries) {
-        //                 const option = document.createElement('option');
-        //                 option.value = country.cca2;
-        //                 option.textContent = country.name.common;
-        //                 selectElement.appendChild(option);
-        //             }
-        //             countrySelect.parentElement.replaceChild(selectElement, countrySelect);
-        //         }
-
-        //     });
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/smoothness/jquery-ui.css" />
+    <script>
+        $(function() {
+            $("#submissionDate").datepicker({
+                dateFormat: 'yy-mm-dd',
+                changeYear: true
+            });
+        });
+    </script>
+
 </body>
 
 </html>

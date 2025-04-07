@@ -14,17 +14,17 @@ return new class extends Migration
         Schema::create('forms', function (Blueprint $table) {
             $table->id();
             $table->string('invoice_id', 10)->unique();
-            $table->timestamp('service_submission_date');
-            $table->string('customer_name');
+            $table->timestamp('service_submission_date')->nullable();
+            $table->string('customer_name')->nullable();
             $table->string('address_line_1')->nullable();
-            $table->string('address_city');
-            $table->string('address_country');
-            $table->string('electronic_account_name');
-            $table->string('type');
-            $table->text('agreed_to_terms');
-            $table->string('phone_number');
-            $table->decimal('amount_previously_paid', 10, 2);
-            $table->string('electronic_signature');
+            $table->string('address_city')->nullable();
+            $table->string('address_country')->nullable();
+            $table->string('electronic_account_name')->nullable();
+            $table->string('type')->nullable();
+            $table->text('agreed_to_terms')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->decimal('amount_previously_paid', 10, 2)->nullable();
+            $table->string('electronic_signature')->nullable();
             $table->text('comments')->nullable();
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();

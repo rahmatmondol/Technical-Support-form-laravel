@@ -1,5 +1,7 @@
 <?php
+
 namespace Database\Seeders;
+
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -17,17 +19,17 @@ class DatabaseSeeder extends Seeder
         $mainAdmin = User::factory()->create([
             'name' => 'Admin',
             'password' => bcrypt('12345678'),
-            'email' => 'hi@aidevlop.com',
+            'email' => 'admin@admin.com',
         ]);
-        $editor = User::factory()->create([
-            'name' => 'Editor',
-            'password' => bcrypt('12345678'),
-            'email' => 'editor@editor.com',
-        ]);
+        // $editor = User::factory()->create([
+        //     'name' => 'Editor',
+        //     'password' => bcrypt('12345678'),
+        //     'email' => 'editor@editor.com',
+        // ]);
         // $this->call([
         //     FormSeeder::class,
         // ]);
-        
+
         // Create permissions first
         $permissions = [
             'create form',
@@ -43,24 +45,24 @@ class DatabaseSeeder extends Seeder
             'delete editor',
             'view editor',
         ];
-        
+
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
         }
-        
+
         // create roles and assign permissions
         $adminRole = Role::create(['name' => 'admin']);
         $editorRole = Role::create(['name' => 'editor']);
-        
+
         $adminRole->givePermissionTo($permissions);
-        
+
         $editorRole->givePermissionTo([
             'view form',
             'create form',
         ]);
-        
+
         // make roles
         $mainAdmin->assignRole('admin');
-        $editor->assignRole('editor');
+        // $editor->assignRole('editor');
     }
 }
