@@ -26,9 +26,9 @@ class FormController extends Controller
 
     public function submissions($id)
     {
-        //check if the user is admin or not
-        if (auth()->user()->hasrole('admin')) {
-            return 404;
+
+        if (!auth()->user()->hasRole('admin')) {
+            abort(403, 'Not Authorized');
         }
 
         $forms = Form::where('user_id', $id)->orderBy('id', 'desc')->paginate(200);
