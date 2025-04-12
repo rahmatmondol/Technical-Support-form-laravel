@@ -14,7 +14,10 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        if (!auth()->user()->hasRole('admin')) {
+            abort(403, 'Not Authorized');
+        }
+
         return view('services.services', [
             'services' => Service::orderBy('id', 'desc')->paginate(10),
         ]);
@@ -25,7 +28,9 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        if (!auth()->user()->hasRole('admin')) {
+            abort(403, 'Not Authorized');
+        }
         return view('services.create_service_form');
     }
 
@@ -34,7 +39,9 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (!auth()->user()->hasRole('admin')) {
+            abort(403, 'Not Authorized');
+        }
         $validated = $request->validate([
             'name' => 'required|string|min:3|max:255',
         ]);
@@ -56,6 +63,9 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
+        if (!auth()->user()->hasRole('admin')) {
+            abort(403, 'Not Authorized');
+        }
         return view('services.edit_service_form', [
             'service' => $service,
         ]);
@@ -66,6 +76,9 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
+        if (!auth()->user()->hasRole('admin')) {
+            abort(403, 'Not Authorized');
+        }
         $validated = $request->validate([
             'name' => 'required|string|min:3|max:255',
         ]);
@@ -83,6 +96,9 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
+        if (!auth()->user()->hasRole('admin')) {
+            abort(403, 'Not Authorized');
+        }
         try {
             $service = Service::findOrFail($id);
             $service->delete();
@@ -91,8 +107,4 @@ class ServiceController extends Controller
             return redirect()->back()->with('error', 'Failed to delete service: ' . $e->getMessage());
         }
     }
-
-
-
-
 }

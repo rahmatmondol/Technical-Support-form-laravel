@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Form;
 use App\Models\Service;
 use App\Models\User;
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 
 class FormController extends Controller
@@ -15,12 +16,21 @@ class FormController extends Controller
      */
     public function index()
     {
-        $forms = Form::orderBy('id', 'desc')->paginate(200);
+        if (auth()->user()->hasrole('admin')) {
+            $forms = Form::orderBy('id', 'desc')->paginate(200);
+        } else {
+            $forms = Form::where('user_id', auth()->user()->id)->orderBy('id', 'desc')->paginate(200);
+        }
         return view('form.forms', compact('forms'));
     }
 
     public function submissions($id)
     {
+        //check if the user is admin or not
+        if (auth()->user()->hasrole('admin')) {
+            return 404;
+        }
+
         $forms = Form::where('user_id', $id)->orderBy('id', 'desc')->paginate(200);
         return view('form.forms', compact('forms'));
     }
@@ -53,22 +63,6 @@ class FormController extends Controller
     {
 
         // dd($request->toArray());
-
-        // $validated = $request->validate([
-        //     'invoice_id' => 'numeric|unique:forms,invoice_id',
-        //     'service_submission_date' => 'date',
-        //     'customer_name' => 'string|max:255|nullable',
-        //     'address_line_1' => 'nullable|string|min:3|max:255|nullable',
-        //     'address_city' => 'string|max:255|nullable',
-        //     'address_country' => 'string|max:255|nullable',
-        //     'electronic_account_name' => 'string|max:255|nullable',
-        //     'type' => 'string|max:255|nullable',
-        //     'agreed_to_terms' => 'string|in:yes,"I agreed through WhatsApp"',
-        //     'phone_number' => 'string|max:25|nullable',
-        //     'amount_previously_paid' => 'numeric|nullable',
-        //     'electronic_signature' => 'string|nullable',
-        //     'comments' => 'nullable|string|max:100',
-        // ]);
 
         try {
             //create a new form
@@ -105,10 +99,6 @@ class FormController extends Controller
      */
     public function show(Form $form)
     {
-
-        // dd($form->toArray());
-
-        // //
         return view('form.print', ['forms' => [$form]]);
     }
 
@@ -154,6 +144,9 @@ class FormController extends Controller
      */
     public function destroy($id)
     {
+        if (!auth()->user()->hasRole('admin')) {
+            abort(403, 'Not Authorized');
+        }
         try {
             $form = Form::findOrFail($id);
             $form->delete();
@@ -165,6 +158,9 @@ class FormController extends Controller
 
     public function printSelected(Request $request)
     {
+        if (!auth()->user()->hasRole('admin')) {
+            abort(403, 'Not Authorized');
+        }
         $selectedForms = $request->selected_forms;
 
         // Fetch all services with the given IDs

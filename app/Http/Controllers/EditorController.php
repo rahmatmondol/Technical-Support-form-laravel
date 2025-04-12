@@ -10,6 +10,9 @@ class EditorController extends Controller
 {
     public function index()
     {
+        if (!auth()->user()->hasRole('admin')) {
+            abort(403, 'Not Authorized');
+        }
         $editors = User::role('editor')->with('forms')->get();
         // calclulate total amount 
         $editors->each(function ($editor) {
@@ -22,6 +25,9 @@ class EditorController extends Controller
 
     public function create()
     {
+        if (!auth()->user()->hasRole('admin')) {
+            abort(403, 'Not Authorized');
+        }
         // Return the view for creating a new editor
         return view('auth.register');
     }
@@ -29,6 +35,10 @@ class EditorController extends Controller
 
     public function store(Request $request)
     {
+        if (!auth()->user()->hasRole('admin')) {
+            abort(403, 'Not Authorized');
+        }
+
         // Validate and store the editor data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -52,6 +62,9 @@ class EditorController extends Controller
     }
     public function update(Request $request, $id)
     {
+        if (!auth()->user()->hasRole('admin')) {
+            abort(403, 'Not Authorized');
+        }
         // Validate and update the editor data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',

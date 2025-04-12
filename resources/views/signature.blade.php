@@ -11,6 +11,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                     <div>
                         <img src="{{ asset('images/signature/' . Auth::user()->signature) }}" alt="Signature Image" class="w-80 h-25 rounded shadow">
+                        <img src="{{ asset('images/stamp/' . Auth::user()->stamp) }}" alt="Signature Image" class="w-80 h-25 rounded shadow">
                     </div>
                     <div>
                         <form method="POST" action="{{ route('profile.signatureUpdate') }}" enctype="multipart/form-data" class="space-y-4">
@@ -18,7 +19,9 @@
                             @method('PUT')
                             <div>
                                 <label for="signature" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Upload New Signature</label>
-                                <input type="file" name="signature" id="signature" class="mt-1 block w-full text-sm text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                                <input type="file" name="signature" id="signature" class=" block w-full text-sm text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                                <label for="stamp" class="block mt-4  text-sm font-medium text-gray-700 dark:text-gray-300">Upload New Stamp</label>
+                                <input type="file" name="stamp" id="stamp" class="mt-1 block w-full text-sm text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                                 @error('signature')
                                     <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                                 @enderror

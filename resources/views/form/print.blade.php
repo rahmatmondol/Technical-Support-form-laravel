@@ -172,6 +172,12 @@
             padding: 5px;
         }
 
+        .stamp-signature-img {
+            display: flex;
+            flex-flow:column;
+            gap: 0px;
+        }
+
         .signature-image {
             height: 85px;
         }
@@ -344,7 +350,8 @@
                                 <td class="description">{{ $form->type }}</td>
                                 <td>{{ $form->electronic_account_name }}</td>
                                 <td data-en="{{ ucfirst($form->agreed_to_terms) }}"
-                                    data-ar="{{ ucfirst($form->agreed_to_terms) == 'I agreed through WhatsApp' ? 'تمت الموافقة عبر الواتس اب' : 'لقد وافقت' }}"> {{ ucfirst($form->agreed_to_terms) }}</td>
+                                    data-ar="{{ ucfirst($form->agreed_to_terms) == 'I agreed through WhatsApp' ? 'تمت الموافقة عبر الواتس اب' : 'لقد وافقت' }}">
+                                    {{ ucfirst($form->agreed_to_terms) }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -358,8 +365,12 @@
                 <div class="signature-section">
                     <div></div>
                     <div class="signature-box">
-                        <img src="{{ asset('images/signature/' . Auth::user()->signature) }}" alt="Signature"
-                            class="signature-image" />
+                        <div class="stamp-signature-img">
+                            <img src="{{ asset('images/signature/' . Auth::user()->signature) }}" alt="Signature"
+                                class="signature-image" />
+                            <img src="{{ asset('images/stamp/' . Auth::user()->stamp) }}" alt="Signature"
+                                class="signature-image" />
+                        </div>
                         <div class="signature-line" data-en="Authorized Signature" data-ar="التوقيع المعتمد">
                             Authorized Signature
                         </div>
