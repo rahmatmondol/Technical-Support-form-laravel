@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
     // })->name('dashboard');
 
     Route::get('editor', [EditorController::class, 'index'])->name('editor');
+    Route::get('editor/{id}/submissions', [FormController::class, 'submissions'])->name('editor.submissions');
 
 
     Route::get('register', [EditorController::class, 'create'])

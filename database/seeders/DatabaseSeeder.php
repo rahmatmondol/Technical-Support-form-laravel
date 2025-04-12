@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Form;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -21,14 +22,13 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('12345678'),
             'email' => 'admin@admin.com',
         ]);
-        // $editor = User::factory()->create([
-        //     'name' => 'Editor',
-        //     'password' => bcrypt('12345678'),
-        //     'email' => 'editor@editor.com',
-        // ]);
-        // $this->call([
-        //     FormSeeder::class,
-        // ]);
+
+        $editor = User::factory()->create([
+            'name' => 'Editor',
+            'password' => bcrypt('12345678'),
+            'email' => 'editor@editor.com',
+        ]);
+
 
         // Create permissions first
         $permissions = [
@@ -63,6 +63,14 @@ class DatabaseSeeder extends Seeder
 
         // make roles
         $mainAdmin->assignRole('admin');
-        // $editor->assignRole('editor');
+        $editor->assignRole('editor');
+
+        // Create 500 forms
+        Form::factory()->count(500)->create();
+
+        // create 500 forms for editor
+        Form::factory()->count(500)->create([
+            'user_id' => $editor->id,
+        ]);
     }
 }

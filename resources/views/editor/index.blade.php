@@ -89,7 +89,7 @@
                                         <td
                                             class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
                                             <div class="flex space-x-2">
-                                                <a href="{{ route('dashboard', ['editor' => $editor->id]) }}"
+                                                <a href="{{ route('editor.submissions', ['id' => $editor->id]) }}"
                                                     class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-1 px-3 rounded shadow">
                                                     View submissions
                                                 </a>

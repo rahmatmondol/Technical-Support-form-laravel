@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Form;
 use App\Models\Service;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class FormController extends Controller
@@ -14,20 +15,13 @@ class FormController extends Controller
      */
     public function index()
     {
-        //get all forms
-        if (auth()->user()->hasRole('editor')) {
-            $forms = Form::where('user_id', auth()->user()->id)->orderBy('id', 'desc')->paginate(20);
-        } elseif (auth()->user()->hasRole('admin')) {
-            $editor_id = request()->query('editor');
-            if ($editor_id) {
-                $forms = Form::where('user_id', $editor_id)->orderBy('id', 'desc')->paginate(20);
-            } else {
-                $forms = Form::orderBy('id', 'desc')->paginate(20);
-            }
-        }
+        $forms = Form::orderBy('id', 'desc')->paginate(200);
+        return view('form.forms', compact('forms'));
+    }
 
-        // return $forms;
-
+    public function submissions($id)
+    {
+        $forms = Form::where('user_id', $id)->orderBy('id', 'desc')->paginate(200);
         return view('form.forms', compact('forms'));
     }
 
@@ -39,7 +33,7 @@ class FormController extends Controller
         //create a 10 digit invoice number unique with invoice_id column in Form model
         do {
             // Generate a random 10-digit number
-            $invoiceNumber = mt_rand(1000000000, 9999999999);
+            $invoiceNumber = intval(substr(now()->format('Ymd') . mt_rand(1000, 9999), 0, 10));
 
             // Check if this number already exists in the database
             $exists = Form::where('invoice_id', $invoiceNumber)->exists();
