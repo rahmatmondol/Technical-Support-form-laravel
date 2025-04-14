@@ -174,12 +174,14 @@
 
         .stamp-signature-img {
             display: flex;
-            flex-flow:column;
+            flex-flow: column;
             gap: 0px;
+            margin-top: -4px;
         }
 
         .signature-image {
-            height: 85px;
+            height: 100px;
+            object-fit: contain;
         }
 
         .signature-line {
@@ -367,9 +369,14 @@
                     <div class="signature-box">
                         <div class="stamp-signature-img">
                             <img src="{{ asset('images/signature/' . Auth::user()->signature) }}" alt="Signature"
-                                class="signature-image" />
+                                class="signature-image"
+                                style="
+                                height: 70px;
+                            " />
                             <img src="{{ asset('images/stamp/' . Auth::user()->stamp) }}" alt="Signature"
-                                class="signature-image" />
+                                class="signature-image" style="
+                                margin-top: -10px;
+                            "/>
                         </div>
                         <div class="signature-line" data-en="Authorized Signature" data-ar="التوقيع المعتمد">
                             Authorized Signature

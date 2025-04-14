@@ -76,8 +76,9 @@ class ProfileController extends Controller
 
         // delete the old signature
         if ($request->hasFile('signature')) {
+            // if have old signature
             $oldImage = public_path('images/signature/' . $user->signature);
-            if (file_exists($oldImage)) {
+            if (file_exists($oldImage) && $user->signature) {
                 unlink($oldImage);
             }
         }
@@ -93,7 +94,7 @@ class ProfileController extends Controller
         // delete the old stamp
         if ($request->hasFile('stamp')) {
             $oldImage = public_path('images/stamp/' . $user->stamp);
-            if (file_exists($oldImage)) {
+            if (file_exists($oldImage) && $user->stamp) {
                 unlink($oldImage);
             }
         }
